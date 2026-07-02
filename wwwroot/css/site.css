@@ -1,0 +1,376 @@
+/* ---------- RESET ---------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0f172a;
+    color: #fff;
+}
+
+/* ---------- COLORS ---------- */
+
+:root {
+
+    --primary: #22c55e;
+
+    --secondary: #16a34a;
+
+    --dark: #111827;
+
+    --card: #1e293b;
+
+    --text-light: #cbd5e1;
+
+}
+
+/* ================= NAVBAR ================= */
+
+.custom-navbar{
+
+    background:#111827;
+
+    padding:18px 0;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    backdrop-filter:blur(10px);
+
+}
+
+.logo{
+
+    color:#22c55e !important;
+
+    font-size:1.6rem;
+
+}
+
+.nav-link{
+
+    color:white !important;
+
+    margin-left:20px;
+
+    transition:.3s;
+
+}
+
+.nav-link:hover{
+
+    color:#22c55e !important;
+
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+    min-height:90vh;
+
+    display:flex;
+
+    align-items:center;
+
+    background:
+        radial-gradient(circle at top right,#1f2937,#0f172a);
+
+}
+
+.hero h1{
+
+    font-size:4rem;
+
+}
+
+.hero p{
+
+    color:#cbd5e1;
+
+    max-width:700px;
+
+    margin:auto;
+
+}
+
+/* ================= PLACEHOLDER ================= */
+
+.calculator-placeholder{
+
+    background:#1e293b;
+
+    border-radius:20px;
+
+    padding:80px;
+
+    text-align:center;
+
+    font-size:2rem;
+
+    color:#94a3b8;
+
+    border:2px dashed #334155;
+
+}
+/* ================= CALCULATOR CARD ================= */
+
+.calculator-card{
+
+    background:rgba(30,41,59,.85);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:25px;
+
+    padding:45px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+
+}
+
+.custom-input{
+
+    background:#111827 !important;
+
+    border:1px solid #374151 !important;
+
+    color:white !important;
+
+    border-radius:12px;
+
+    padding:14px;
+
+}
+
+.custom-input:focus{
+
+    border-color:#22c55e !important;
+
+    box-shadow:0 0 0 .2rem rgba(34,197,94,.25);
+
+}
+
+.form-label{
+
+    color:#e2e8f0;
+
+    font-weight:600;
+
+}
+
+/* ================= RESULTS ================= */
+
+#results{
+    padding-top:80px;
+    padding-bottom:80px;
+}
+
+.result-card {
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.35);
+}
+
+.result-icon{
+
+    font-size:2.5rem;
+
+    margin-bottom:15px;
+
+}
+
+.result-card h6{
+
+    color:#9ca3af;
+
+    margin-bottom:10px;
+
+    font-weight:500;
+
+}
+
+.result-card h2{
+
+    font-size:2.8rem;
+
+    font-weight:700;
+
+    color:#22c55e;
+
+    margin-bottom:8px;
+
+}
+
+.result-card small{
+
+    color:#94a3b8;
+
+}
+
+.result-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#22c55e;
+
+}
+
+.result-card h5{
+
+    color:#94a3b8;
+
+    margin-bottom:20px;
+
+}
+
+.result-card h2{
+
+    font-size:42px;
+
+    color:#22c55e;
+
+    font-weight:700;
+
+}
+
+.result-card span{
+
+    color:#cbd5e1;
+
+}
+
+/* ================= FEATURES ================= */
+
+.feature-card{
+
+    background:#1e293b;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    text-align:center;
+
+    transition:.3s;
+
+    height:100%;
+
+    border:1px solid rgba(255,255,255,.06);
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#22c55e;
+
+    box-shadow:0 15px 40px rgba(34,197,94,.15);
+
+}
+
+.feature-icon{
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+
+}
+
+.feature-card h4{
+
+    margin-bottom:15px;
+
+}
+
+.feature-card p{
+
+    color:#cbd5e1;
+
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+
+    background:#111827;
+
+    padding:60px 0;
+
+    margin-top:80px;
+
+    border-top:1px solid rgba(255,255,255,.05);
+
+}
+
+.footer p,
+.footer small{
+
+    color:#94a3b8;
+
+}
+
+/* ================= CHART ================= */
+
+.chart-card{
+
+    background:#1f2937;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    height:100%;
+
+}
+
+#macroChart{
+
+    max-height:350px;
+
+}
+
+.macro-progress{
+
+    margin-bottom:30px;
+
+}
+
+.macro-progress span{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    font-weight:600;
+
+}
+
+.progress{
+
+    height:18px;
+
+    border-radius:50px;
+
+    background:#111827;
+
+}
