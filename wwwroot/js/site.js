@@ -1,6 +1,84 @@
-﻿let macroChart = null;
+﻿const trainingStyles = {
+
+    GeneralFitness: [
+        "General Fitness",
+        "Weight Loss",
+        "Muscle Gain"
+    ],
+
+    StrengthSports: [
+        "Bodybuilding",
+        "Powerlifting",
+        "Olympic Weightlifting",
+        "Strongman"
+    ],
+
+    EnduranceSports: [
+        "Running",
+        "Marathon",
+        "Cycling",
+        "Swimming",
+        "Triathlon"
+    ],
+
+    CombatSports: [
+        "Boxing",
+        "Kickboxing",
+        "MMA",
+        "Brazilian Jiu-Jitsu",
+        "Wrestling"
+    ],
+
+    TeamSports: [
+        "Football",
+        "Basketball",
+        "Cricket",
+        "Volleyball",
+        "Hockey"
+    ],
+
+    CrossFit: [
+        "CrossFit",
+        "HYROX",
+        "Functional Fitness"
+    ]
+
+};
+
+function updateTrainingStyles() {
+
+    const sport = document.getElementById("sportCategory").value;
+
+    const trainingSelect = document.getElementById("trainingStyle");
+
+    trainingSelect.innerHTML = "";
+
+    trainingStyles[sport].forEach(style => {
+
+        const option = document.createElement("option");
+
+        option.value = style.replace(/\s+/g, "");
+
+        option.textContent = style;
+
+        trainingSelect.appendChild(option);
+
+    });
+
+}
+
+
+
+let macroChart = null;
 
 document.addEventListener("DOMContentLoaded", () => {
+    
+
+     updateTrainingStyles();
+
+    document
+        .getElementById("sportCategory")
+        .addEventListener("change", updateTrainingStyles);
 
     initializeChart();
 
@@ -146,7 +224,11 @@ async function calculateMacros() {
 
         goal: document.getElementById("goal").value,
 
-        proteinPreference: document.getElementById("proteinPreference").value
+        proteinPreference: document.getElementById("proteinPreference").value,
+
+        sportCategory: document.getElementById("sportCategory").value,
+
+        trainingStyle: document.getElementById("trainingStyle").value
 
     };
 

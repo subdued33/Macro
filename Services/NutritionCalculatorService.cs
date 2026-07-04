@@ -35,52 +35,42 @@ public class NutritionCalculatorService
         };
 
         double maintenanceCalories = bmr * activityMultiplier;
+        MacroProfile profile = GetMacroProfile(input);
 
         // -----------------------------
         // Goal Calories
         // -----------------------------
         double targetCalories = input.Goal switch
-        {
-            "Cut" => maintenanceCalories * 0.82,      // ~18% deficit
-            "Bulk" => maintenanceCalories * 1.10,     // 10% surplus
-            "Recomp" => maintenanceCalories * 0.98,   // slight deficit
-            _ => maintenanceCalories
-        };
+{
+    "Cut" => maintenanceCalories * 0.82,
+    "Bulk" => maintenanceCalories * 1.10,
+    "Recomp" => maintenanceCalories * 0.98,
+    _ => maintenanceCalories
+};
 
-        // Never recommend dangerously low calories
-        targetCalories = Math.Max(targetCalories, bmr * 1.20);
+targetCalories *= profile.CalorieMultiplier;
+
+// Never recommend dangerously low calories
+targetCalories = Math.Max(targetCalories, bmr * 1.20);
 
         // -----------------------------
         // Protein
         // -----------------------------
-        double proteinPerKg = input.Goal switch
-        {
-            "Cut" => 2.2,
-            "Bulk" => 1.8,
-            "Recomp" => 2.2,
-            _ => 1.6
-        };
+        double proteinPerKg = profile.ProteinPerKg;
 
-        if (input.ProteinPreference == "High")
-            proteinPerKg += 0.2;
+if (input.ProteinPreference == "High")
+{
+    proteinPerKg += 0.2;
+}
 
-        double protein = weightKg * proteinPerKg;
+double protein = weightKg * proteinPerKg;
 
-        // -----------------------------
-        // Fat
-        // -----------------------------
-        double fatPerKg = input.Goal switch
-        {
-            "Cut" => 0.7,
-            "Bulk" => 0.9,
-            "Recomp" => 0.8,
-            _ => 0.8
-        };
+double fat = weightKg * profile.FatPerKg;
 
-        double fat = weightKg * fatPerKg;
+// Never recommend extremely low fat intake
+fat = Math.Max(fat, 40);
 
-        // Never recommend extremely low fat intake
-        fat = Math.Max(fat, 40);
+        
 
         // -----------------------------
         // Calories From Protein & Fat
@@ -150,4 +140,134 @@ public class NutritionCalculatorService
             CarbCalories = Math.Round(remainingCalories)
         };
     }
+
+
+    private MacroProfile GetMacroProfile(CalculatorInput input)
+{
+    return input.TrainingStyle switch
+    {
+        // Strength Sports
+        "Bodybuilding" => new MacroProfile
+        {
+            ProteinPerKg = input.Goal == "Cut" ? 2.3 : 2.0,
+            FatPerKg = 0.8
+        },
+
+        "Powerlifting" => new MacroProfile
+        {
+            ProteinPerKg = 1.9,
+            FatPerKg = 0.9,
+            CalorieMultiplier = input.Goal == "Bulk" ? 1.12 : 1.0
+        },
+
+        "OlympicWeightlifting" => new MacroProfile
+        {
+            ProteinPerKg = 1.8,
+            FatPerKg = 0.8
+        },
+
+        "Strongman" => new MacroProfile
+        {
+            ProteinPerKg = 2.0,
+            FatPerKg = 1.0,
+            CalorieMultiplier = 1.10
+        },
+
+        // Endurance Sports
+        "Running" => new MacroProfile
+        {
+            ProteinPerKg = 1.7,
+            FatPerKg = 0.8
+        },
+
+        "Marathon" => new MacroProfile
+        {
+            ProteinPerKg = 1.7,
+            FatPerKg = 0.8,
+            CalorieMultiplier = 1.08
+        },
+
+        "Cycling" => new MacroProfile
+        {
+            ProteinPerKg = 1.7,
+            FatPerKg = 0.8,
+            CalorieMultiplier = 1.08
+        },
+
+        "Swimming" => new MacroProfile
+        {
+            ProteinPerKg = 1.8,
+            FatPerKg = 0.8,
+            CalorieMultiplier = 1.05
+        },
+
+        // Combat Sports
+        "Boxing" => new MacroProfile
+        {
+            ProteinPerKg = 2.1,
+            FatPerKg = 0.8
+        },
+
+        "Kickboxing" => new MacroProfile
+        {
+            ProteinPerKg = 2.1,
+            FatPerKg = 0.8
+        },
+
+        "MMA" => new MacroProfile
+        {
+            ProteinPerKg = 2.2,
+            FatPerKg = 0.8
+        },
+
+        "BrazilianJiuJitsu" => new MacroProfile
+        {
+            ProteinPerKg = 2.0,
+            FatPerKg = 0.8
+        },
+
+        "Wrestling" => new MacroProfile
+        {
+            ProteinPerKg = 2.2,
+            FatPerKg = 0.8
+        },
+
+        // Team Sports
+        "Football" => new MacroProfile
+        {
+            ProteinPerKg = 1.8,
+            FatPerKg = 0.8
+        },
+
+        "Basketball" => new MacroProfile
+        {
+            ProteinPerKg = 1.8,
+            FatPerKg = 0.8
+        },
+
+        "Cricket" => new MacroProfile
+        {
+            ProteinPerKg = 1.8,
+            FatPerKg = 0.8
+        },
+
+        "Volleyball" => new MacroProfile
+        {
+            ProteinPerKg = 1.8,
+            FatPerKg = 0.8
+        },
+
+        "Hockey" => new MacroProfile
+        {
+            ProteinPerKg = 1.9,
+            FatPerKg = 0.8
+        },
+
+        _ => new MacroProfile
+        {
+            ProteinPerKg = 1.8,
+            FatPerKg = 0.8
+        }
+    };
+}
 }

@@ -17,4 +17,8 @@ public class CalculatorInput
     public string Goal { get; set; } = "Maintain";
 
     public string ProteinPreference { get; set; } = "Standard";
+
+    public string SportCategory { get; set; } = "GeneralFitness";
+
+    public string TrainingStyle { get; set; } = "GeneralFitness";
 }
