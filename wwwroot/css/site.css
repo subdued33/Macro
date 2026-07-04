@@ -140,6 +140,12 @@ body {
 
     box-shadow:0 20px 40px rgba(0,0,0,.35);
 
+    width:100%;
+
+    max-width:100%;
+
+    box-sizing:border-box;
+
 }
 
 .custom-input{
@@ -153,6 +159,10 @@ body {
     border-radius:12px;
 
     padding:14px;
+
+    width:100%;
+
+    box-sizing:border-box;
 
 }
 
@@ -372,5 +382,55 @@ body {
     border-radius:50px;
 
     background:#111827;
+
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width:768px){
+
+    html,
+    body{
+        overflow-x:hidden;
+    }
+
+    .container,
+    .container-fluid{
+        overflow-x:hidden;
+    }
+
+    .hero{
+        padding:70px 20px 40px;
+        text-align:center;
+    }
+
+    .hero h1{
+        font-size:2.7rem;
+        line-height:1.1;
+    }
+
+    .hero p{
+        font-size:1.05rem;
+    }
+
+    .calculator-card{
+
+        margin-top:30px;
+
+        padding:30px 20px;
+    }
+
+    .result-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    canvas{
+
+        max-width:100%;
+
+        height:auto !important;
+
+    }
 
 }
